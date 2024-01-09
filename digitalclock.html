@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+<style>
+    body{
+        background-color: grey;
+    }
+    .container{
+        text-align: center;
+        font-size:30px;
+        
+    }
+    #box{
+        height:50px;
+        width:200px;
+        text-align: center;
+        background-color: bisque;
+    }
+    
+</style>
+</head>
+<body>
+    <div class="container">
+        <h3>Your Local Time</h3>
+        <input type="text" id="box" readonly >
+    </div>
+
+    <script>
+        function updateLocalTime() {
+        
+            const currentDate = new Date();
+
+            const localTime = currentDate.toLocaleTimeString();
+
+            
+            document.getElementById('box').value =`${localTime}`;
+        }
+
+    
+        updateLocalTime();
+        setInterval(updateLocalTime, 1000);
+    </script>
+    
+</body>
+</html>

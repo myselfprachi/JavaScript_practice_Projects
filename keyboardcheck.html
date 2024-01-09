@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard_check</title>
+</head>
+<body>
+    <div id="insert"></div>
+    <div class="key"><h3>Press the key and watch magic</h3></div>
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+            const insertDiv = document.getElementById('insert');
+            insertDiv.innerText = `You pressed: ${event.key}`;
+        });
+    </script>
+</body>
+</html>

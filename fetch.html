@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Profile</title>
+<style>
+  #profileContainer{
+    background-color:bisque;
+    text-align: center;
+
+  }
+  p{
+    font-size: 30px;
+  }
+
+</style>
+</head>
+<body>
+
+  <div id="profileContainer">
+  
+  </div>
+
+  <script>
+    const username = 'myselfprachi';
+
+    fetch(`https://api.github.com/users/${username}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        } 
+        return response.json();
+      })
+      .then(user => {
+        const numberOfFollowers = user.followers;
+
+        
+        const profileHtml = `
+          <h1>${user.name}</h1>
+          <img src="${user.avatar_url}" alt="Profile Photo" style="width: 300px; height: 300px; border-radius: 50%;">
+          <p>Username: ${user.login}</p>
+          <p>Number of Followers: ${numberOfFollowers}</p>
+          <p>Public Repositories: ${user.public_repos}</p>
+          <!-- Add more information as needed -->
+        `;
+
+    
+        const profileContainer = document.getElementById('profileContainer');
+
+  
+        profileContainer.innerHTML = profileHtml;
+      })
+      .catch(error => {
+        console.error('GitHub API error:', error);
+      });
+  </script>
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess a Number</title>
+    <style>
+         body {
+            background-color: grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1{
+            font-family: 'Courier New', Courier, monospace;
+            color: chocolate;
+        }
+
+        .box {
+            text-align: center;
+            width: 50%;
+            background-color: azure;
+            padding: 20px;
+        }
+        #heading{
+            font-size: 30px;
+        }
+
+        #submit {
+            margin-top: 2%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="heading">Number guessing game</h1>
+        <div class="box">
+            <h3>Try and guess a random number between 1 to 100.</h3>
+            <h3>You have 10 attempts to guess the right number</h3>
+            <h1>Guess a number </h1>
+            <div>
+                <input type="number" id="number">
+            </div>
+            <div>
+                <input type="button" value="Submit guess" id="submit" onclick="checkGuess()">
+            </div>
+            <h3 id="previous">Previous Guesses:</h3>
+            <h3 id="remaining">Remaining Guesses: 10</h3>
+        </div> 
+    </div>
+
+    <script>
+        let targetNumber = Math.floor(Math.random() * 100) + 1;
+        let remainingGuesses = 10;
+        let previousGuesses = [];
+
+        function checkGuess() {
+            if (remainingGuesses <= 0) {
+                alert('You have already used all your attempts. Please reset the game.');
+                return;
+            }
+
+            const guess = parseInt(document.getElementById('number').value);
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                alert('Please enter a valid number between 1 and 100.');
+                return;
+            }
+
+            remainingGuesses--;
+
+            previousGuesses.push(guess);
+
+            document.getElementById('previous').innerText = `Previous Guesses: ${previousGuesses.join(', ')}`;
+            document.getElementById('remaining').innerText = `Remaining Guesses: ${remainingGuesses}`;
+
+            if (guess === targetNumber) {
+                alert(`Congratulations! You guessed the correct number: ${targetNumber}`);
+                disableInput();
+            } else if (remainingGuesses === 0) {
+                alert(`Game over! The correct number was ${targetNumber}`);
+                disableInput();
+            }
+        }
+
+        function disableInput() {
+            document.getElementById('number').disabled = true;
+            document.getElementById('submit').disabled = true;
+        }
+
+        function resetGame() {
+            targetNumber = Math.floor(Math.random() * 100) + 1;
+            remainingGuesses = 10;
+            previousGuesses = [];
+            document.getElementById('previous').innerText = 'Previous Guesses:';
+            document.getElementById('remaining').innerText = 'Remaining Guesses: 10';
+            document.getElementById('number').value = '';
+            document.getElementById('number').disabled = false;
+            document.getElementById('submit').disabled = false;
+        }
+    </script>
+</body>
+</html>
